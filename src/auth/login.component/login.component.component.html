@@ -1,0 +1,38 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-logo">
+      <h1>Travel Admin</h1>
+      <p>Tour & Travel Management System</p>
+    </div>
+
+    <h2>Admin Login</h2>
+
+    <form (ngSubmit)="login()">
+      <div class="input-group">
+        <label>Email Address</label>
+
+        <input
+          type="email"
+          placeholder="Enter Email"
+          [(ngModel)]="email"
+          name="email"
+        />
+      </div>
+
+      <div class="input-group">
+        <label>Password</label>
+
+        <input
+          type="password"
+          placeholder="Enter Password"
+          [(ngModel)]="password"
+          name="password"
+        />
+      </div>
+
+      <button type="submit">Login</button>
+    </form>
+
+    <div class="footer-text">© 2026 Travel Admin Panel</div>
+  </div>
+</div>

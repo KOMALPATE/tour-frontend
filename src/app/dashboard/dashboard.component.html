@@ -1,0 +1,115 @@
+<div class="dashboard">
+  <!-- SIDEBAR -->
+
+  <div class="sidebar">
+    <div class="logo">
+      <h2>Travel Admin</h2>
+    </div>
+
+    <ul class="menu">
+      <li class="active"><span>🏠</span> Dashboard</li>
+
+      <li><span>✈️</span> Tours</li>
+
+      <li><span>📦</span> Packages</li>
+
+      <li><span>🏨</span> Hotels</li>
+
+      <li><span>📋</span> Bookings</li>
+
+      <li><span>👤</span> Users</li>
+
+      <li><span>📩</span> Inquiries</li>
+
+      <li (click)="logout()"><span>🚪</span> Logout</li>
+    </ul>
+  </div>
+
+  <!-- MAIN CONTENT -->
+
+  <div class="main-content">
+    <!-- HEADER -->
+
+    <div class="header">
+      <div>
+        <h1>Dashboard</h1>
+        <p>Welcome Back Admin 👋</p>
+      </div>
+
+      <div class="admin-profile">
+        <img src="https://i.pravatar.cc/40" alt="" />
+
+        <div>
+          <h4>Admin</h4>
+          <p>Administrator</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARDS -->
+
+    <div class="cards">
+      <div class="card">
+        <h2>150</h2>
+        <p>Total Tours</p>
+      </div>
+
+      <div class="card">
+        <h2>320</h2>
+        <p>Total Bookings</p>
+      </div>
+
+      <div class="card">
+        <h2>85</h2>
+        <p>Total Hotels</p>
+      </div>
+
+      <div class="card">
+        <h2>1200</h2>
+        <p>Total Users</p>
+      </div>
+    </div>
+
+    <!-- TABLE -->
+
+    <div class="table-section">
+      <div class="table-header">
+        <h2>Recent Bookings</h2>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Destination</th>
+            <th>Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>Komal</td>
+            <td>Goa</td>
+            <td>28 May 2026</td>
+            <td><span class="success">Confirmed</span></td>
+          </tr>
+
+          <tr>
+            <td>Rahul</td>
+            <td>Dubai</td>
+            <td>25 May 2026</td>
+            <td><span class="pending">Pending</span></td>
+          </tr>
+
+          <tr>
+            <td>Priya</td>
+            <td>Manali</td>
+            <td>20 May 2026</td>
+            <td><span class="success">Confirmed</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
