@@ -1,1 +1,61 @@
-<p>tours works!</p>
+<div class="tour-container">
+  <div class="top-section">
+    <h2>Tours Management</h2>
+
+    <button (click)="openForm()">+ Add Tour</button>
+  </div>
+
+  <!-- TABLE -->
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Tour Name</th>
+        <th>Destination</th>
+        <th>Price</th>
+        <th>Duration</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let tour of tours">
+        <td>{{ tour.id }}</td>
+        <td>{{ tour.tour_name }}</td>
+        <td>{{ tour.destination }}</td>
+        <td>₹ {{ tour.price }}</td>
+        <td>{{ tour.duration }}</td>
+        <td>{{ tour.status }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- POPUP FORM -->
+
+<div class="popup" *ngIf="showForm">
+  <div class="popup-form">
+    <h2>Add Tour</h2>
+
+    <input type="text" placeholder="Tour Name" [(ngModel)]="tour_name" />
+
+    <input type="text" placeholder="Destination" [(ngModel)]="destination" />
+
+    <input type="number" placeholder="Price" [(ngModel)]="price" />
+
+    <input type="text" placeholder="Duration" [(ngModel)]="duration" />
+
+    <select [(ngModel)]="status">
+      <option value="">Select Status</option>
+      <option value="Active">Active</option>
+      <option value="Draft">Draft</option>
+    </select>
+
+    <div class="btns">
+      <button (click)="addTour()">Save</button>
+
+      <button class="close-btn" (click)="closeForm()">Close</button>
+    </div>
+  </div>
+</div>
