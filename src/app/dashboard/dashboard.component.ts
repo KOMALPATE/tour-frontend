@@ -18,4 +18,7 @@ export class DashboardComponent {
       this.router.navigate(['/']);
     }
   }
+  tour() {
+    this.router.navigate(['/tours']);
+  }
 }
