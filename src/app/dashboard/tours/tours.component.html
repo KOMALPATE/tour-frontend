@@ -1,42 +1,64 @@
 <div class="tour-container">
-  <div class="top-section">
-    <h2>Tours Management</h2>
+  <div class="header-card">
+    <div>
+      <h1>🌍 Tours Management</h1>
+      <p>Manage all travel packages from one place</p>
+    </div>
 
-    <button (click)="openForm()">+ Add Tour</button>
+    <button class="add-btn" (click)="openForm()">+ Add New Tour</button>
   </div>
 
-  <!-- TABLE -->
+  <div class="table-card">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Tour Name</th>
+          <th>Destination</th>
+          <th>Price</th>
+          <th>Duration</th>
+          <th>Status</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
 
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Tour Name</th>
-        <th>Destination</th>
-        <th>Price</th>
-        <th>Duration</th>
-        <th>Status</th>
-      </tr>
-    </thead>
+      <tbody>
+        <tr *ngFor="let tour of tours">
+          <td>{{ tour.id }}</td>
+          <td>{{ tour.tour_name }}</td>
+          <td>📍 {{ tour.destination }}</td>
+          <td>₹{{ tour.price }}</td>
+          <td>{{ tour.duration }}</td>
 
-    <tbody>
-      <tr *ngFor="let tour of tours">
-        <td>{{ tour.id }}</td>
-        <td>{{ tour.tour_name }}</td>
-        <td>{{ tour.destination }}</td>
-        <td>₹ {{ tour.price }}</td>
-        <td>{{ tour.duration }}</td>
-        <td>{{ tour.status }}</td>
-      </tr>
-    </tbody>
-  </table>
+          <td>
+            <span
+              class="badge"
+              [ngClass]="tour.status === 'Active' ? 'active' : 'draft'"
+            >
+              {{ tour.status }}
+            </span>
+          </td>
+          <td>{{ tour.start_date | date: "dd MMM yyyy" }}</td>
+          <td>{{ tour.end_date | date: "dd MMM yyyy" }}</td>
+          <td>
+            <button class="edit-btn" (click)="editTour(tour)">Edit</button>
+
+            <button class="delete-btn" (click)="deleteTour(tour.id)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
-
-<!-- POPUP FORM -->
-
 <div class="popup" *ngIf="showForm">
   <div class="popup-form">
-    <h2>Add Tour</h2>
+    <div class="dialog-header">
+      <h2>Add New Tour</h2>
+    </div>
 
     <input type="text" placeholder="Tour Name" [(ngModel)]="tour_name" />
 
@@ -46,6 +68,10 @@
 
     <input type="text" placeholder="Duration" [(ngModel)]="duration" />
 
+    <input type="date" [(ngModel)]="start_date" />
+
+    <input type="date" [(ngModel)]="end_date" />
+
     <select [(ngModel)]="status">
       <option value="">Select Status</option>
       <option value="Active">Active</option>
@@ -53,9 +79,9 @@
     </select>
 
     <div class="btns">
-      <button (click)="addTour()">Save</button>
+      <button class="save-btn" (click)="addTour()">Save Tour</button>
 
-      <button class="close-btn" (click)="closeForm()">Close</button>
+      <button class="cancel-btn" (click)="closeForm()">Cancel</button>
     </div>
   </div>
 </div>
