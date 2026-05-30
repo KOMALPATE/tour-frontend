@@ -25,9 +25,10 @@ export class LoginComponentComponent {
       password: this.password,
     };
 
-    this.http.post('http://localhost:5000/api/admin/login', data).subscribe({
+    this.http.post('http://localhost:4000/api/admin/login', data).subscribe({
       next: (res: any) => {
         console.log(res);
+        localStorage.setItem('token', res.token);
 
         if (res.success) {
           alert('Login Successful');

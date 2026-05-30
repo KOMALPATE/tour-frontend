@@ -9,6 +9,15 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent {
   constructor(private router: Router) {}
+
+  ngOnInit() {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      this.router.navigate(['/']);
+    }
+  }
+
   logout() {
     const confirmLogout = confirm('Are you sure you want to logout?');
 
