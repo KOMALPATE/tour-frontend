@@ -1,12 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { AddTourComponent } from './component/add-tour/add-tour.component';
+import { TourService } from './tour.service';
 
 @Component({
   selector: 'app-tours',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, MatTableModule, MatSortModule],
 
   templateUrl: './tours.component.html',
   styleUrl: './tours.component.css',
@@ -14,107 +19,59 @@ import { FormsModule } from '@angular/forms';
 export class ToursComponent {
   showForm = false;
   loadTours: any;
-
   tours: any[] = [];
-  tour_name = '';
-  destination = '';
-  price = '';
-  duration = '';
 
-  start_date = '';
-  end_date = '';
-  description = '';
-  image = '';
+  dataSource = new MatTableDataSource<any>([]);
 
-  status = '';
+  @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private dialog: MatDialog,
+    private tourService: TourService,
+  ) {}
 
   ngOnInit(): void {
     this.getTours();
   }
 
-  openForm() {
-    this.showForm = true;
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
   }
 
-  closeForm() {
-    this.showForm = false;
-  }
+  displayedColumns: string[] = [
+    'tour_name',
+    'destination',
+    'price',
+    'duration',
+    'start_date',
+    'end_date',
+    'status',
+  ];
 
-  addTour() {
-    const data = {
-      tour_name: this.tour_name,
-      destination: this.destination,
-      price: this.price,
-      duration: this.duration,
-      start_date: this.start_date,
-      end_date: this.end_date,
-      description: this.description,
-      image: this.image,
-      status: this.status,
-    };
-    this.http.post('http://localhost:4000/api/tours/add', data).subscribe({
+  getTours() {
+    this.tourService.getTours().subscribe({
       next: (res: any) => {
-        alert(res.message);
+        console.log('API Response:', res);
 
-        this.getTours();
-
-        this.closeForm();
+        this.dataSource.data = res;
+      },
+      error: (err) => {
+        console.log(err);
       },
     });
   }
 
-  selectedId: number = 0;
+  openAddDialog() {
+    const dialogRef = this.dialog.open(AddTourComponent, {
+      width: '800px',
+      maxWidth: '90vw',
+    });
 
-  editTour(tour: any) {
-    this.selectedId = tour.id;
-
-    this.tour_name = tour.tour_name;
-    this.destination = tour.destination;
-    this.price = tour.price;
-    this.duration = tour.duration;
-    this.start_date = tour.start_date;
-    this.end_date = tour.end_date;
-    this.status = tour.status;
-
-    this.showForm = true;
-  }
-
-  updateTour() {
-    const data = {
-      tour_name: this.tour_name,
-      destination: this.destination,
-      price: this.price,
-      duration: this.duration,
-      start_date: this.start_date,
-      end_date: this.end_date,
-      status: this.status,
-    };
-
-    this.http
-      .put(`http://localhost:4000/api/tours/update/${this.selectedId}`, data)
-      .subscribe(() => {
-        this.loadTours();
-        this.closeForm();
-      });
-  }
-
-  deleteTour(id: number) {
-    if (confirm('Delete this tour?')) {
-      this.http
-        .delete(`http://localhost:4000/api/tours/delete/${id}`)
-        .subscribe(() => {
-          this.getTours();
-        });
-    }
-  }
-
-  getTours() {
-    this.http.get<any>('http://localhost:4000/api/tours').subscribe({
-      next: (res) => {
-        this.tours = res;
-      },
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.getTours();
+      }
     });
   }
 }
