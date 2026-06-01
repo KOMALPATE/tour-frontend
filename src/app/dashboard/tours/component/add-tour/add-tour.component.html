@@ -1,1 +1,60 @@
-<p>add-tour works!</p>
+<div class="dialog-container">
+  <div class="card-view">
+    <h2>Add Tour</h2>
+
+    <form [formGroup]="tourForm" (ngSubmit)="addTour()">
+      <div class="form-group">
+        <label>Tour Name</label>
+        <input type="text" formControlName="tour_name" />
+      </div>
+
+      <div class="form-group">
+        <label>Destination</label>
+        <input type="text" formControlName="destination" />
+      </div>
+
+      <div class="form-group">
+        <label>Price</label>
+        <input type="number" formControlName="price" />
+      </div>
+
+      <div class="form-group">
+        <label>Duration</label>
+        <input type="text" formControlName="duration" />
+      </div>
+
+      <div class="form-group">
+        <label>Start Date</label>
+        <input type="date" formControlName="start_date" />
+      </div>
+
+      <div class="form-group">
+        <label>End Date</label>
+        <input type="date" formControlName="end_date" />
+      </div>
+
+      <div class="form-group">
+        <label>Status</label>
+        <select formControlName="status">
+          <option value="Active">Active</option>
+          <option value="Draft">Draft</option>
+        </select>
+      </div>
+
+      <div class="btn-group">
+        <button
+          type="button"
+          class="cancel-btn"
+          (click)="closeDialog()"
+          [disabled]="loading"
+        >
+          Cancel
+        </button>
+
+        <button type="submit" class="save-btn" [disabled]="loading">
+          {{ loading ? "Adding..." : "Add Tour" }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
