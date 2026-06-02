@@ -35,4 +35,7 @@ export class DashboardComponent {
   package() {
     this.router.navigate(['/packages']);
   }
+  users() {
+    this.router.navigate(['/users']);
+  }
 }
