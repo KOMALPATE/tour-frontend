@@ -1,0 +1,47 @@
+<div class="user-card">
+  <div class="header">
+    <h2>Users</h2>
+  </div>
+
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    <!-- Name -->
+    <ng-container matColumnDef="customer_name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Customer Name</th>
+
+      <td mat-cell *matCellDef="let element">
+        {{ element.customer_name }}
+      </td>
+    </ng-container>
+
+    <!-- Phone -->
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Phone</th>
+
+      <td mat-cell *matCellDef="let element">
+        {{ element.phone }}
+      </td>
+    </ng-container>
+
+    <!-- Email -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+
+      <td mat-cell *matCellDef="let element">
+        {{ element.email }}
+      </td>
+    </ng-container>
+
+    <!-- Created Date -->
+    <ng-container matColumnDef="created_at">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Created Date</th>
+
+      <td mat-cell *matCellDef="let element">
+        {{ element.created_at | date: "dd/MM/yyyy" }}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

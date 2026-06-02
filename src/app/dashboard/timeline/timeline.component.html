@@ -4,58 +4,19 @@
   </div>
 
   <div class="timeline">
-    <div class="timeline-item">
-      <div class="dot new"></div>
-      <div class="content">
-        <div class="top">
-          <h4>New Inquiry</h4>
-          <span class="time">10:00 AM</span>
-        </div>
-        <p>Rahul Patel - Goa Package</p>
-      </div>
-    </div>
+    <div class="timeline-item" *ngFor="let item of timelineData">
+      <div class="dot"></div>
 
-    <div class="timeline-item">
-      <div class="dot contacted"></div>
       <div class="content">
         <div class="top">
-          <h4>Contacted</h4>
-          <span class="time">10:30 AM</span>
-        </div>
-        <p>Customer contacted successfully</p>
-      </div>
-    </div>
+          <h4>{{ item.status }}</h4>
 
-    <div class="timeline-item">
-      <div class="dot quote"></div>
-      <div class="content">
-        <div class="top">
-          <h4>Quotation Sent</h4>
-          <span class="time">11:00 AM</span>
+          <span class="time">
+            {{ item.created_at }}
+          </span>
         </div>
-        <p>₹25,000 package quotation shared</p>
-      </div>
-    </div>
 
-    <div class="timeline-item">
-      <div class="dot payment"></div>
-      <div class="content">
-        <div class="top">
-          <h4>Payment Received</h4>
-          <span class="time">12:30 PM</span>
-        </div>
-        <p>Advance payment received</p>
-      </div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="dot success"></div>
-      <div class="content">
-        <div class="top">
-          <h4>Booking Confirmed</h4>
-          <span class="time">01:00 PM</span>
-        </div>
-        <p>Hotel and flight booked</p>
+        <p>{{ item.remarks }}</p>
       </div>
     </div>
   </div>

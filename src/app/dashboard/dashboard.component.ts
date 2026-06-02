@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [],
+  imports: [RouterOutlet],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
@@ -29,13 +29,16 @@ export class DashboardComponent {
   }
 
   tour() {
-    this.router.navigate(['/tours']);
+    this.router.navigate(['dashboard/tours']);
   }
 
   package() {
-    this.router.navigate(['/packages']);
+    this.router.navigate(['dashboard/packages']);
   }
   users() {
-    this.router.navigate(['/users']);
+    this.router.navigate(['dashboard/users']);
+  }
+  inquiries() {
+    this.router.navigate(['dashboard/inquiries']);
   }
 }
