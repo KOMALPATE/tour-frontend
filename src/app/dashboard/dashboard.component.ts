@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
+import { DashboardService } from './dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,9 +9,15 @@ import { Router, RouterOutlet } from '@angular/router';
   styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent {
-  constructor(private router: Router) {}
+  dashboardCounts: any = {};
+
+  constructor(
+    private router: Router,
+    private dashboardService: DashboardService,
+  ) {}
 
   ngOnInit() {
+    this.loadCounts();
     const token = localStorage.getItem('token');
 
     if (!token) {
@@ -26,6 +33,18 @@ export class DashboardComponent {
 
       this.router.navigate(['/']);
     }
+  }
+
+  loadCounts() {
+    this.dashboardService.getDashboardData().subscribe({
+      next: (res: any) => {
+        console.log(res);
+        this.dashboardCounts = res;
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
   }
 
   tour() {

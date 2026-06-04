@@ -1,12 +1,12 @@
 <div class="dashboard">
   <!-- SIDEBAR -->
 
-  <div class="sidebar">
+  <div class="dashboard-sidebar">
     <div class="logo">
       <h2>Travel Admin</h2>
     </div>
 
-    <ul class="menu">
+    <ul class="dashboard-sidebar-menu">
       <li class="active"><span>🏠</span> Dashboard</li>
 
       <li (click)="tour()"><span>✈️</span> Tours</li>
@@ -27,10 +27,10 @@
 
   <!-- MAIN CONTENT -->
 
-  <div class="main-content">
+  <div class="dashboard-main-content">
     <!-- HEADER -->
 
-    <div class="header">
+    <div class="dashboard-main-content-header">
       <div>
         <h1>Dashboard</h1>
         <p>Welcome Back Admin 👋</p>
@@ -48,25 +48,25 @@
 
     <!-- CARDS -->
 
-    <div class="cards">
+    <div class="dashboard-main-content-cards">
       <div class="card">
-        <h2>150</h2>
+        <h2>{{ dashboardCounts.totalTours }}</h2>
         <p>Total Tours</p>
       </div>
 
       <div class="card">
-        <h2>320</h2>
-        <p>Total Bookings</p>
+        <h2>{{ dashboardCounts.totalPackages }}</h2>
+        <p>Total Packages</p>
       </div>
 
       <div class="card">
-        <h2>85</h2>
-        <p>Total Hotels</p>
-      </div>
-
-      <div class="card">
-        <h2>1200</h2>
+        <h2>{{ dashboardCounts.totalUsers }}</h2>
         <p>Total Users</p>
+      </div>
+
+      <div class="card">
+        <h2>{{ dashboardCounts.totalInquiries }}</h2>
+        <p>Total Inquiries</p>
       </div>
     </div>
     <router-outlet></router-outlet>
