@@ -1,40 +1,60 @@
-<div class="inquiry-conatainer">
-  <tbody>
-    <ng-container *ngFor="let item of inquiries">
-      <tr>
-        <td>{{ item.customer_name }}</td>
-        <td>{{ item.phone }}</td>
-        <td>{{ item.destination }}</td>
-        <td>{{ item.status }}</td>
+<div class="inquiry-container">
+  <div class="table-section">
+    <div class="table-header">
+      <h2>Inquiries</h2>
+    </div>
 
-        <td>
-          <button class="timeline-btn" (click)="viewTimeline(item.id)">
-            Timeline
-          </button>
-        </td>
-      </tr>
+    <table>
+      <thead>
+        <tr>
+          <th>Customer Name</th>
+          <th>Phone</th>
+          <th>Destination</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
 
-      <tr *ngIf="selectedInquiryId === item.id">
-        <td colspan="6">
-          <div class="timeline-container">
-            <div class="timeline-step" *ngFor="let step of timelineData">
-              <div class="timeline-icon">✓</div>
+      <tbody>
+        <ng-container *ngFor="let item of inquiries">
+          <tr>
+            <td>{{ item.customer_name }}</td>
+            <td>{{ item.phone }}</td>
+            <td>{{ item.destination }}</td>
+            <td>
+              <span class="status-badge">{{ item.status }}</span>
+            </td>
 
-              <div class="timeline-content">
-                <div class="timeline-header">
-                  <h4>{{ step.status }}</h4>
+            <td>
+              <button class="timeline-btn" (click)="viewTimeline(item.id)">
+                Timeline
+              </button>
+            </td>
+          </tr>
 
-                  <span>
-                    {{ step.created_at }}
-                  </span>
+          <tr *ngIf="selectedInquiryId === item.id">
+            <td colspan="5">
+              <div class="timeline-container">
+                <div class="timeline-step" *ngFor="let step of timelineData">
+                  <div class="timeline-icon">&#10003;</div>
+
+                  <div class="timeline-content">
+                    <div class="timeline-header">
+                      <h4>{{ step.status }}</h4>
+
+                      <span>
+                        {{ step.created_at }}
+                      </span>
+                    </div>
+
+                    <p>{{ step.remarks }}</p>
+                  </div>
                 </div>
-
-                <p>{{ step.remarks }}</p>
               </div>
-            </div>
-          </div>
-        </td>
-      </tr>
-    </ng-container>
-  </tbody>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
 </div>

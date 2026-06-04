@@ -1,8 +1,13 @@
+.inquiry-container {
+  width: 100%;
+}
+
 .table-section {
   background: #fff;
   padding: 20px;
   border-radius: 15px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  overflow-x: auto;
 }
 
 .table-header {
@@ -16,17 +21,23 @@
 table {
   width: 100%;
   border-collapse: collapse;
+  min-width: 760px;
 }
 
 th {
   background: #f8fafc;
   text-align: left;
   padding: 14px;
+  color: #334155;
+  font-size: 14px;
+  font-weight: 700;
 }
 
 td {
   padding: 14px;
   border-bottom: 1px solid #eee;
+  color: #475569;
+  vertical-align: middle;
 }
 
 .status-badge {
@@ -34,6 +45,9 @@ td {
   color: #15803d;
   padding: 5px 12px;
   border-radius: 20px;
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .timeline-btn {
@@ -43,7 +57,17 @@ td {
   padding: 8px 15px;
   border-radius: 8px;
   cursor: pointer;
+  font-weight: 600;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
 }
+
+.timeline-btn:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
 .timeline-container {
   margin-top: 15px;
   padding: 20px;

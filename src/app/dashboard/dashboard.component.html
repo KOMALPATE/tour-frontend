@@ -1,43 +1,30 @@
 <div class="dashboard">
-  <!-- SIDEBAR -->
-
   <div class="dashboard-sidebar">
     <div class="logo">
       <h2>Travel Admin</h2>
     </div>
 
     <ul class="dashboard-sidebar-menu">
-      <li class="active"><span>🏠</span> Dashboard</li>
-
-      <li (click)="tour()"><span>✈️</span> Tours</li>
-
-      <li (click)="package()"><span>📦</span> Packages</li>
-
-      <li><span>🏨</span> Hotels</li>
-
-      <li><span>📋</span> Bookings</li>
-
-      <li (click)="users()"><span>👤</span> Users</li>
-
-      <li (click)="inquiries()"><span>📩</span> Inquiries</li>
-
-      <li (click)="logout()"><span>🚪</span> Logout</li>
+      <li class="active" (click)="dashboard()"><span>&#8962;</span> Dashboard</li>
+      <li (click)="tour()"><span>&#9992;</span> Tours</li>
+      <li (click)="package()"><span>&#9638;</span> Packages</li>
+      <li><span>&#8962;</span> Hotels</li>
+      <li><span>&#9776;</span> Bookings</li>
+      <li (click)="users()"><span>&#128100;</span> Users</li>
+      <li (click)="inquiries()"><span>&#9993;</span> Inquiries</li>
+      <li (click)="logout()"><span>&#10162;</span> Logout</li>
     </ul>
   </div>
 
-  <!-- MAIN CONTENT -->
-
   <div class="dashboard-main-content">
-    <!-- HEADER -->
-
     <div class="dashboard-main-content-header">
       <div>
         <h1>Dashboard</h1>
-        <p>Welcome Back Admin 👋</p>
+        <p>Welcome Back Admin</p>
       </div>
 
       <div class="admin-profile">
-        <img src="https://i.pravatar.cc/40" alt="" />
+        <img src="https://i.pravatar.cc/40" alt="Admin profile" />
 
         <div>
           <h4>Admin</h4>
@@ -46,29 +33,28 @@
       </div>
     </div>
 
-    <!-- CARDS -->
-
     <div class="dashboard-main-content-cards">
       <div class="card">
-        <h2>{{ dashboardCounts.totalTours }}</h2>
+        <h2>{{ dashboardCounts.totalTours || 0 }}</h2>
         <p>Total Tours</p>
       </div>
 
       <div class="card">
-        <h2>{{ dashboardCounts.totalPackages }}</h2>
+        <h2>{{ dashboardCounts.totalPackages || 0 }}</h2>
         <p>Total Packages</p>
       </div>
 
       <div class="card">
-        <h2>{{ dashboardCounts.totalUsers }}</h2>
+        <h2>{{ dashboardCounts.totalUsers || 0 }}</h2>
         <p>Total Users</p>
       </div>
 
       <div class="card">
-        <h2>{{ dashboardCounts.totalInquiries }}</h2>
+        <h2>{{ dashboardCounts.totalInquiries || 0 }}</h2>
         <p>Total Inquiries</p>
       </div>
     </div>
+
     <router-outlet></router-outlet>
   </div>
 </div>

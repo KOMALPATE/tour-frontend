@@ -1,19 +1,16 @@
-<div class="timeline-card">
-  <div class="timeline-header">
-    <h2>📋 Inquiry Timeline</h2>
+<div class="tl-card">
+  <div class="tl-head">
+    <h2>Inquiry Timeline</h2>
   </div>
 
-  <div class="timeline">
-    <div class="timeline-item" *ngFor="let item of timelineData">
-      <div class="dot"></div>
+  <div class="tl-list">
+    <div class="tl-item" *ngFor="let item of timelineData">
+      <span class="tl-dot"></span>
 
-      <div class="content">
-        <div class="top">
+      <div class="tl-box">
+        <div class="tl-top">
           <h4>{{ item.status }}</h4>
-
-          <span class="time">
-            {{ item.created_at }}
-          </span>
+          <span>{{ item.created_at }}</span>
         </div>
 
         <p>{{ item.remarks }}</p>

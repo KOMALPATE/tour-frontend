@@ -29,6 +29,7 @@ export class DashboardComponent {
     const confirmLogout = confirm('Are you sure you want to logout?');
 
     if (confirmLogout) {
+      localStorage.removeItem('token');
       alert('Logout Successful');
 
       this.router.navigate(['/']);
@@ -49,6 +50,10 @@ export class DashboardComponent {
 
   tour() {
     this.router.navigate(['dashboard/tours']);
+  }
+
+  dashboard() {
+    this.router.navigate(['dashboard']);
   }
 
   package() {
