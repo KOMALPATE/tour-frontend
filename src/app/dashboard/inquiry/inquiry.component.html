@@ -1,60 +1,72 @@
-<div class="inquiry-container">
-  <div class="table-section">
-    <div class="table-header">
-      <h2>Inquiries</h2>
-    </div>
-
-    <table>
-      <thead>
-        <tr>
-          <th>Customer Name</th>
-          <th>Phone</th>
-          <th>Destination</th>
-          <th>Status</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <ng-container *ngFor="let item of inquiries">
-          <tr>
-            <td>{{ item.customer_name }}</td>
-            <td>{{ item.phone }}</td>
-            <td>{{ item.destination }}</td>
-            <td>
-              <span class="status-badge">{{ item.status }}</span>
-            </td>
-
-            <td>
-              <button class="timeline-btn" (click)="viewTimeline(item.id)">
-                Timeline
-              </button>
-            </td>
-          </tr>
-
-          <tr *ngIf="selectedInquiryId === item.id">
-            <td colspan="5">
-              <div class="timeline-container">
-                <div class="timeline-step" *ngFor="let step of timelineData">
-                  <div class="timeline-icon">&#10003;</div>
-
-                  <div class="timeline-content">
-                    <div class="timeline-header">
-                      <h4>{{ step.status }}</h4>
-
-                      <span>
-                        {{ step.created_at }}
-                      </span>
-                    </div>
-
-                    <p>{{ step.remarks }}</p>
-                  </div>
-                </div>
-              </div>
-            </td>
-          </tr>
-        </ng-container>
-      </tbody>
-    </table>
+<div class="page-card inquiry-page">
+  <div class="page-header">
+    <h2>Inquiries</h2>
   </div>
+
+  <table mat-table [dataSource]="dataSource" multiTemplateDataRows>
+    <ng-container matColumnDef="customer_name">
+      <th mat-header-cell *matHeaderCellDef>Customer Name</th>
+      <td mat-cell *matCellDef="let item">{{ item.customer_name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef>Phone</th>
+      <td mat-cell *matCellDef="let item">{{ item.phone }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="destination">
+      <th mat-header-cell *matHeaderCellDef>Destination</th>
+      <td mat-cell *matCellDef="let item">{{ item.destination }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <td mat-cell *matCellDef="let item">
+        <span class="status-badge">{{ item.status }}</span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef>Action</th>
+      <td mat-cell *matCellDef="let item">
+        <button type="button" class="primary-btn" (click)="viewTimeline(item.id)">
+          Timeline
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="detail">
+      <td mat-cell *matCellDef="let item" [attr.colspan]="displayedColumns.length">
+        <div class="timeline-box" *ngIf="selectedInquiryId === item.id">
+          <div class="timeline-step" *ngFor="let step of timelineData">
+            <span class="timeline-icon">&#10003;</span>
+
+            <div class="timeline-content">
+              <div class="timeline-top">
+                <h4>{{ step.status }}</h4>
+                <span>{{ step.created_at }}</span>
+              </div>
+
+              <p>{{ step.remarks }}</p>
+            </div>
+          </div>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: detailColumns"
+      class="detail-row"
+      [class.open]="selectedInquiryId === row.id"
+    ></tr>
+  </table>
+
+  <mat-paginator
+    [pageSize]="5"
+    [pageSizeOptions]="[5, 10, 25]"
+    showFirstLastButtons
+  ></mat-paginator>
 </div>

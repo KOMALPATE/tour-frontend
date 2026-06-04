@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, viewChild, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PackageService } from './package.service';
 import { AddPackageComponent } from './dialog/add-package/add-package.component';
@@ -6,17 +6,20 @@ import { MatDialog } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-package',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatSortModule],
+  imports: [CommonModule, MatTableModule, MatSortModule, MatPaginatorModule],
   templateUrl: './package.component.html',
   styleUrl: './package.component.css',
 })
 export class PackageComponent {
   packages: any[] = [];
   dataSource = new MatTableDataSource<any>([]);
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -31,6 +34,7 @@ export class PackageComponent {
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
   displayedColumns: string[] = [
@@ -45,7 +49,10 @@ export class PackageComponent {
       next: (res: any) => {
         console.log(res);
 
-        this.dataSource.data = res; // IMPORTANT
+        this.dataSource.data = res;
+        this.dataSource.paginator = this.paginator;
+
+        // IMPORTANT
       },
       error: (err) => {
         console.log(err);

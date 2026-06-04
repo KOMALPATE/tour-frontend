@@ -7,11 +7,18 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { AddTourComponent } from './component/add-tour/add-tour.component';
 import { TourService } from './tour.service';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-tours',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatTableModule, MatSortModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+  ],
 
   templateUrl: './tours.component.html',
   styleUrl: './tours.component.css',
@@ -23,6 +30,7 @@ export class ToursComponent {
 
   dataSource = new MatTableDataSource<any>([]);
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
@@ -37,6 +45,7 @@ export class ToursComponent {
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
   displayedColumns: string[] = [
@@ -55,6 +64,7 @@ export class ToursComponent {
         console.log('API Response:', res);
 
         this.dataSource.data = res;
+        this.dataSource.paginator = this.paginator;
       },
       error: (err) => {
         console.log(err);
