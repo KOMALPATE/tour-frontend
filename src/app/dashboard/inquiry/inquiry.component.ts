@@ -3,11 +3,12 @@ import { InquiryService } from './inquiry.service';
 import { CommonModule } from '@angular/common';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-inquiry',
   standalone: true,
-  imports: [CommonModule, MatPaginatorModule, MatTableModule],
+  imports: [CommonModule, MatPaginatorModule, MatTableModule, MatSelectModule],
   templateUrl: './inquiry.component.html',
   styleUrl: './inquiry.component.css',
 })
@@ -53,6 +54,12 @@ export class InquiryComponent {
 
     this.inquiryService.getTimeline(id).subscribe((res: any) => {
       this.timelineData = res;
+    });
+  }
+
+  updateStatus(id: number, status: string) {
+    this.inquiryService.updateInquiryStatus(id, status).subscribe(() => {
+      this.inquiryList();
     });
   }
 }

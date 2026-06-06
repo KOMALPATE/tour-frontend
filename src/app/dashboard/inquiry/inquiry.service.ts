@@ -16,4 +16,8 @@ export class InquiryService {
   getTimeline(id: number) {
     return this.http.get(`${this.apiUrl}/api/timeline/${id}`);
   }
+
+  updateInquiryStatus(id: number, data: string) {
+    return this.http.put(`${this.apiUrl}/api/inquiries/${id}/status`, data);
+  }
 }
